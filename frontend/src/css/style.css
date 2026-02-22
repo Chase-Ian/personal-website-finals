@@ -1,0 +1,893 @@
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 90px; /* Adjust so section titles aren't hidden */
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.logo {
+  font-family: 'Press Start 2P';
+  font-size: 14px;
+  color: #000;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.6;
+  color: #333;
+  background-color: #f4f4f9;
+  padding-top: 80px;
+  /* Soft blue gradient base */
+  background: linear-gradient(135deg, #f4f7ff 0%, #e2e9ff 100%) !important;
+  overflow-x: hidden;
+}
+
+/* Faint grid lines overlay */
+.ui-grid-lines {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-image: 
+    linear-gradient(rgba(67, 101, 239, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(67, 101, 239, 0.05) 1px, transparent 1px);
+  background-size: 50px 50px;
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* Large slanted light-blue shape at the top-right */
+.ui-shape-1 {
+  position: fixed;
+  top: -10%;
+  right: -5%;
+  width: 60%;
+  height: 40%;
+  background: rgba(67, 101, 239, 0.03);
+  transform: skewX(-20deg);
+  pointer-events: none;
+  z-index: -2;
+}
+
+/* Smaller accent shape at the bottom-left */
+.ui-shape-2 {
+  position: fixed;
+  bottom: -5%;
+  left: -10%;
+  width: 40%;
+  height: 30%;
+  background: rgba(67, 101, 239, 0.03);
+  transform: skewX(-20deg);
+  pointer-events: none;
+  z-index: -2;
+}
+
+section {
+  padding: 40px 0;
+}
+
+button {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 10px;
+  background-color: #000;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  image-rendering: pixelated; /* Ensures crisp edges */
+}
+
+.post-btn {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 10px;
+  background-color: #000;
+  color: #fff;
+  border: none;
+  padding: 12px 24px;
+  cursor: pointer;
+  width: 100%; /* Makes it a big blocky button */
+  transition: background 0.2s;
+}
+
+.post-btn:hover {
+  background-color: #007bff;
+  box-shadow: 4px 4px 0px #0056b3;
+}
+
+button:hover {
+  background-color: #007bff; /* A splash of color for the "Modern" feel */
+}
+
+/* Use the pixel font for headings and nav */
+h1, h2, .nav-links a {
+  font-family: 'Press Start 2P', cursive;
+  text-transform: uppercase;
+}
+
+
+.archive-nav {
+  position: fixed; /* Pins it to the viewport */
+  top: 0;
+  left: 0;
+  width: 100%; /* Ensures it covers the full width */
+  background-color: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(8px); /* Slightly stronger blur for that premium UI feel */
+  border-bottom: 3px solid #4365ef;
+  padding: 0.5rem 0; /* Padding inside the nav */
+  z-index: 1000; /* Keeps it above all other content */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Ensure the logo and links still align within your container width */
+.archive-nav .nav-flex {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 15px; /* Spacing between the menu items */
+  margin-left: auto; /* Pushes the entire list to the right */
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #555;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 8px;
+  display: flex;
+  flex-direction: column; /* Icon over Text */
+  align-items: center;
+  padding: 10px 15px;
+  position: relative; /* For the blue bar effect */
+  transition: all 0.2s ease;
+}
+
+.nav-icon {
+  font-size: 20px;
+  margin-bottom: 4px;
+  transition: transform 0.2s ease;
+}
+
+/* --- The Blue Archive Selection Effect --- */
+.nav-links a:hover {
+  color: #4365ef;
+}
+
+.nav-links a:hover .nav-icon {
+  transform: translateY(-3px); /* Subtle bounce up */
+}
+
+/* The blue bar that appears at the bottom on hover */
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -3px; /* Sits right on the border */
+  width: 0;
+  height: 4px;
+  background: #4365ef;
+  transition: width 0.2s ease;
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+/* Mobile: Stack them when space is tight */
+@media (max-width: 768px) {
+  .nav-flex {
+    flex-direction: column;
+    padding: 15px 0;
+  }
+  .nav-links {
+    margin-left: 0;
+    margin-top: 10px;
+    gap: 5px;
+  }
+}
+
+/* Basic Responsiveness */
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* On screens smaller than 768px (Tablets/Phones) */
+@media (max-width: 768px) {
+  .nav-menu {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .project-grid {
+    grid-template-columns: 1fr; 
+  }
+}
+
+
+/* --- Static Cards (Home, Education, Projects) --- */
+.card {
+  background: white;
+  border: 4px solid #000; 
+  padding: 20px;
+  box-shadow: 8px 8px 0px #ccc; /* Keeps the pixel look without moving */
+  margin-bottom: 20px;
+  /* transition removed as it's no longer needed for movement */
+}
+
+/* Ensure the card itself doesn't stretch weirdly */
+.gallery-item {
+  display: flex;
+  flex-direction: column;
+  padding: 10px; /* Internal "Polaroid" border spacing */
+  height: 100%;
+  cursor: pointer;
+  background: #fff;
+}
+
+/* Force the image area to be a perfect square (or rectangle) */
+.image-container {
+  width: 100%;
+  aspect-ratio: 1 / 1; /* Makes every image area a square */
+  overflow: hidden;
+  border: 2px solid #000;
+  background-color: #f0f0f0; /* Optional: light gray placeholder if img is missing */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* This is the MAGIC: it crops the photo to fit the box without stretching it */
+  image-rendering: pixelated; 
+}
+
+/* Specific fix for your drawing: if it's a PNG with transparency/white bg */
+.image-container img[src*="ryan_avatar"] {
+  object-fit: contain; /* Keeps the drawing from being cropped */
+  background: #fff;    /* Ensures white background matches the card */
+}
+
+/* Align the text at the bottom consistently */
+.card-footer {
+  margin-top: 10px;
+  text-align: center;
+}
+
+.view-details-text {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 8px;
+  margin: 0;
+  color: #000;
+}
+
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+
+.pixel-input {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 15px;
+  border: 4px solid #000; 
+  background-color: #fff;
+  font-family: 'Segoe UI', sans-serif; 
+  font-size: 14px;
+  outline: none;
+  transition: all 0.2s;
+}
+
+
+.pixel-input:focus {
+  border-color: #007bff; 
+  box-shadow: 4px 4px 0px rgba(0, 123, 255, 0.2);
+}
+
+
+.pixel-input::placeholder {
+  font-family: 'Press Start 2P', cursive; 
+  font-size: 8px; 
+  color: #aaa;
+}
+
+.admin-btn {
+  background-color: #000;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 8px;
+  padding: 4px 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.admin-btn:hover {
+  background: #4365ef;
+  color: #fff;
+}
+
+.admin-btn.delete:hover {
+  background: #ff4d4d;
+  border-color: #ff4d4d;
+}
+
+.loading-text {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 10px;
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+
+.entry-card {
+  background: #fff;
+  border: 4px solid #000; 
+  padding: 15px;
+  margin-bottom: 20px;
+  box-shadow: 4px 4px 0px #ccc; 
+}
+
+
+.entry-user {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 10px;
+  color: #007bff;
+  display: block;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+
+
+.entry-text {
+  font-family: 'Segoe UI', sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #333;
+}
+
+.entry-actions {
+  margin-top: 15px;
+  display: flex;
+  gap: 10px;
+  border-top: 2px dashed #eee; /* Decorative separator */
+  padding-top: 10px;
+}
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7); /* Dim the background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+}
+
+/* The Main Window Box */
+.window-box {
+  background: #fff;
+  border: 4px solid #000;
+  width: 90%;
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  animation: modalPop 0.15s ease-out;
+}
+
+/* The Top Bar of the Window */
+.window-header {
+  background: #000;
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 12px;
+}
+
+.window-title {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 8px;
+}
+
+/* The X button inside the header */
+.window-close {
+  background: #ff4d4d;
+  color: white;
+  border: 2px solid #fff;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 10px;
+  padding: 2px 6px;
+  cursor: pointer;
+  line-height: 1;
+}
+
+.window-close:hover {
+  background: #fff;
+  color: #ff4d4d;
+  border-color: #ff4d4d;
+}
+
+/* Limit the image height so the text is always visible */
+.window-body .modal-img {
+  max-height: 50vh; /* Image will take up at most 50% of the screen height */
+  width: auto;      /* Maintains aspect ratio */
+  margin: 0 auto 15px auto;
+  display: block;
+  object-fit: contain; /* Ensures the drawing isn't cropped */
+}
+
+/* Ensure the window doesn't get too tall */
+.window-box {
+  max-height: 90vh; 
+  display: flex;
+  flex-direction: column;
+}
+
+.window-body {
+  overflow-y: visible; /* We want to avoid internal scrolls if possible */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.modal-text {
+  text-align: center;
+  width: 100%;
+}
+/* The Multi-Flip Easter Egg Animation */
+.pixel-flip {
+  /* 0.15s per flip, repeats 3 times */
+  animation: horizontalFlip 0.15s linear 3; 
+}
+
+@keyframes horizontalFlip {
+  0% {
+    transform: rotateY(0deg);
+  }
+  100% {
+    transform: rotateY(180deg); 
+  }
+}
+
+.image-container {
+  position: relative; /* Necessary for the badge positioning */
+}
+
+.video-badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: rgba(0, 0, 0, 0.7);
+  color: #fff;
+  border: 2px solid #fff;
+  padding: 2px 6px;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 8px;
+  pointer-events: none; /* Let the click pass through to the card */
+}
+
+
+/* The Grid Container in home */
+/* Container for the whole achievement section */
+.achievement-panel {
+  background: #1b2838; /* Steam dark blue */
+  border: 2px solid #000;
+  padding: 20px !important;
+}
+
+.achievement-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid #2a475e;
+  padding-bottom: 10px;
+  margin-bottom: 15px;
+}
+
+.achievement-count {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 10px;
+  color: #66c0f4; /* Steam light blue */
+}
+
+/* Individual Row */
+.achievement-row {
+  display: flex;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.3);
+  margin-bottom: 8px;
+  padding: 10px;
+  text-decoration: none;
+  transition: background 0.2s;
+  border: 1px solid transparent;
+}
+
+.achievement-row:hover {
+  background: rgba(42, 71, 94, 0.5); /* Steam hover color */
+  border: 1px solid #66c0f4;
+}
+
+/* The Square Icon */
+.achievement-icon-box {
+  width: 48px;
+  height: 48px;
+  background: #2a475e;
+  border: 1px solid #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 15px;
+  flex-shrink: 0;
+}
+
+.achievement-icon {
+  font-size: 24px;
+}
+
+/* Text Styling */
+.achievement-text {
+  flex-grow: 1;
+}
+
+.achievement-title {
+  color: #ebebeb;
+  font-size: 12px;
+  margin: 0;
+  font-family: 'Press Start 2P', cursive;
+}
+
+.achievement-desc {
+  color: #8f98a0;
+  font-size: 11px;
+  margin-top: 5px;
+}
+
+/* Glowing pixel at the end */
+.status-pixel {
+  width: 8px;
+  height: 8px;
+  background: #66c0f4;
+  box-shadow: 0 0 8px #66c0f4;
+}
+
+.certification-header {
+  color: #ffffff;
+}
+
+/* Special glow for Projects (Gold/Rare) */
+.project-rarity {
+  background: #ffcc00 !important;
+  box-shadow: 0 0 10px #ffcc00 !important;
+}
+
+/* Ensure project rows align items to the top for longer descriptions */
+.project-item {
+  align-items: flex-start !important;
+  height: 100%; /* Keeps boxes even in a grid */
+  border: 1px solid #2a475e;
+}
+
+.project-item:hover {
+  border-color: #ffcc00 !important;
+}
+
+/* Make icons in projects slightly larger */
+.project-item .achievement-icon-box {
+  background: #1b2838;
+  border-color: #ffcc00;
+}
+
+.project-header{
+  color: #ffffff;
+}
+
+/* --- Logo & Rank Grouping --- */
+.logo-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 14px;
+  letter-spacing: -1px;
+  color: #333;
+}
+
+.rank-badge {
+  display: flex;
+  flex-direction: column;
+  background: #4365ef;
+  color: #fff;
+  padding: 2px 6px;
+  border-radius: 4px;
+  line-height: 1;
+}
+
+.rank-label {
+  font-size: 6px;
+  font-family: 'Press Start 2P', cursive;
+}
+
+.rank-num {
+  font-size: 10px;
+  font-weight: bold;
+  font-family: 'Segoe UI', sans-serif;
+  text-align: center;
+}
+
+/* --- Navbar Background Shape --- */
+/* This makes the navbar look slightly skewed/geometric on one side */
+.archive-nav::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 250px;
+  height: 100%;
+  background: rgba(67, 101, 239, 0.05);
+  transform: skewX(-20deg) translateX(-50px);
+  z-index: -1;
+}
+
+/* --- Blue Archive Halo --- */
+.profile-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 0;
+}
+
+.ba-halo {
+  position: absolute;
+  top: 10px; /* Adjust to sit right above/behind the head */
+  width: 120px;
+  height: 25px;
+  border: 3px solid rgba(67, 101, 239, 0.6); /* Signature Blue */
+  border-radius: 50%;
+  box-shadow: 0 0 15px rgba(67, 101, 239, 0.5), 
+              inset 0 0 10px rgba(67, 101, 239, 0.3);
+  z-index: -1; /* Sits behind the image */
+  animation: haloFloat 4s ease-in-out infinite;
+}
+
+/* Optional: Add a small "cross" or notch to the halo for more detail */
+.ba-halo::before {
+  content: '';
+  position: absolute;
+  top: -5px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 15px;
+  height: 3px;
+  background: #4365ef;
+  box-shadow: 0 0 8px #4365ef;
+}
+
+/* Floating Animation */
+@keyframes haloFloat {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 0.8;
+  }
+  50% {
+    transform: translateY(-10px) rotate(2deg);
+    opacity: 1;
+  }
+}
+
+/* Ensure your avatar stays on top and crisp */
+.profile-container .image-container {
+  z-index: 1;
+  background: transparent; /* Makes the halo visible behind it */
+}
+
+/* Container to hold halo and text together */
+.logo-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Specific scale for the halo inside the navbar */
+.nav-halo {
+  width: 100px !important; /* Smaller for the nav */
+  height: 20px !important;
+  top: -10px !important; /* Position it slightly above the text */
+  opacity: 0.6;
+  filter: blur(0.5px);
+}
+
+/* Logo styling to ensure it's readable over the halo */
+.logo {
+  position: relative;
+  z-index: 2; /* Sits in front of the halo */
+  font-family: 'Press Start 2P', cursive;
+  font-size: 12px;
+  color: #000;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 1); /* Makes text pop over glow */
+}
+
+/* Ensure Logo Group doesn't get squished */
+.logo-group {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+/* --- Blue Archive Splash Screen --- */
+.ba-loader-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #f4f7ff; /* Light BA blue/white */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.loader-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+/* Make the halo spin and pulse for the loader */
+.loader-halo {
+  width: 150px !important;
+  height: 40px !important;
+  position: relative !important;
+  animation: haloLoadSpin 2s infinite linear, haloPulse 1s infinite alternate !important;
+}
+
+.loading-text {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 12px;
+  color: #4365ef;
+  letter-spacing: 2px;
+}
+
+/* The container for the bar */
+.loading-bar-container {
+  width: 250px; /* Made it a bit wider for better effect */
+  height: 6px;
+  background: rgba(67, 101, 239, 0.1);
+  border-radius: 10px;
+  overflow: hidden;
+  margin-top: 15px;
+  border: 1px solid rgba(67, 101, 239, 0.2);
+}
+
+/* The actual filling part */
+/* Wrapper to align bar and percentage */
+.loading-bar-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end; /* Aligns 100% to the right of the bar */
+  gap: 5px;
+}
+
+.loading-bar-container {
+  width: 280px;
+  height: 8px;
+  background: rgba(67, 101, 239, 0.1);
+  border-radius: 4px;
+  overflow: hidden;
+  border: 1px solid rgba(67, 101, 239, 0.3);
+}
+
+.loading-bar-fill {
+  width: 0%;
+  height: 100%;
+  background: #4365ef;
+  box-shadow: 0 0 12px rgba(67, 101, 239, 0.6);
+  /* Uses a "stepped" timing to look like a game loading assets */
+  animation: fillBar 2.2s cubic-bezier(0.65, 0.05, 0.36, 1) forwards;
+}
+
+.percent-text {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 8px;
+  color: #4365ef;
+  opacity: 0;
+  transform: translateY(5px);
+  transition: all 0.3s ease;
+}
+
+.percent-text.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@keyframes fillBar {
+  0% { width: 0%; }
+  30% { width: 45%; }
+  70% { width: 85%; }
+  100% { width: 100%; }
+}
+
+
+
+/* --- Wave Text Animation --- */
+.ba-loading-wave {
+  font-family: 'Segoe UI', sans-serif; /* Using a cleaner sans-serif for the "Now Loading" look */
+  font-weight: 800;
+  font-style: italic;
+  font-size: 24px;
+  color: #4365ef;
+  display: flex;
+  gap: 2px;
+}
+
+.ba-loading-wave span {
+  display: inline-block;
+  animation: waveJump 1.2s infinite ease-in-out;
+}
+
+@keyframes waveJump {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  25% {
+    transform: translateY(-10px); /* The "Up" part of the wave */
+  }
+  50% {
+    transform: translateY(0);
+  }
+}
+
+/* --- Floating (Non-Spinning) Halo --- */
+.loader-halo {
+  width: 140px !important;
+  height: 35px !important;
+  margin-bottom: 20px;
+  /* Removes rotation to let it just float gracefully */
+  animation: haloFloatOnly 3s infinite ease-in-out !important;
+}
+
+@keyframes haloFloatOnly {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+    opacity: 0.7;
+  }
+  50% {
+    transform: translateY(-15px) scale(1.05); /* Floating up and slightly growing */
+    opacity: 1;
+  }
+}
+
+/* Background tweak to match your second image */
+.ba-loader-screen {
+  background: linear-gradient(135deg, #dae5ff 0%, #ffffff 100%);
+  position: fixed;
+  inset: 0;
+  display: flex;
+  z-index: 9999;
+}
+
