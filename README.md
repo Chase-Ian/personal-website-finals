@@ -4,7 +4,7 @@ This is a webprog finals submission, a personal profile website, may also be use
 A personal portfolio inspired by the 'Blue Archive' UI, built with React and CSS.
 
 ## 🚀 Live Demo
-[\[Link to your Vercel/GitHub Pages\]](https://personal-website-finals-six-delta.vercel.app/)
+[\[Link to website\]](https://personal-website-finals-six-delta.vercel.app/)
 
 ## 🛠️ Tech Stack
 * **Frontend:** React.js
