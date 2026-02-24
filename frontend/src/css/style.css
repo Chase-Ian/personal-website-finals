@@ -891,3 +891,57 @@ img {
   z-index: 9999;
 }
 
+.ba-footer {
+  width: 100%;
+  padding: 60px 0 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+.footer-line {
+  width: 80%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #4365ef, transparent);
+  opacity: 0.3;
+}
+
+.footer-content {
+  text-align: center;
+}
+
+.footer-copyright {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 8px;
+  color: #888;
+  letter-spacing: 1px;
+}
+
+.system-notes-btn {
+  margin-top: 10px;
+  background: none;
+  border: none;
+  color: #4365ef;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 9px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.system-notes-btn:hover {
+  color: #000;
+  text-shadow: 0 0 10px rgba(67, 101, 239, 0.4);
+}
+
+/* Modal Overlay Styles */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10000;
+}

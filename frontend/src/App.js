@@ -6,6 +6,7 @@ import Home from './components/Home';
 import Education from './components/Education';
 import Projects from './components/Projects';
 import Gallery from './components/Gallery';
+import Footer from './components/Footer';
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -73,9 +74,7 @@ function App() {
         </section>
       </div>
 
-      <footer style={{ textAlign: 'center', padding: '20px', marginTop: '40px', fontFamily: '"Press Start 2P", cursive', fontSize: '10px' }}>
-        <p>© 2026 My Personal Profile</p>
-      </footer>
+      <Footer />
     </div>
   );
 }
